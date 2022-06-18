@@ -1,5 +1,5 @@
 {
     "name": "Dremel 3D Printer",
-    "iot_class": "Local Polling",
-    "homeassistant": "2022.6.0"
+    "hacs": "1.25.5",
+    "homeassistant": "2022.6.6"
 }

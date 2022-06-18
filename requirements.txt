@@ -1,0 +1,4 @@
+pre-commit
+homeassistant
+
+dremel3dpy

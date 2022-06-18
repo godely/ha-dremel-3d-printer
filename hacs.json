@@ -1,10 +1,11 @@
 {
-    "name": "Integration blueprint",
-    "hacs": "1.6.0",
+    "name": "Dremel 3D Printer",
+    "hacs": "1.25.5",
     "domains": [
         "binary_sensor",
-        "sensor",
-        "switch"
+        "button",
+        "camera",
+        "sensor"
     ],
-    "homeassistant": "0.118.0"
+    "homeassistant": "2022.6.6"
 }

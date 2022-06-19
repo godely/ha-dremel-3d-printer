@@ -1,9 +1,16 @@
 """Define test fixtures for Dremel 3D Printer."""
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
 from homeassistant.const import CONF_HOST
+
+# This fixture enables loading custom integrations in all tests.
+# Remove to enable selective use of this fixture
+@pytest.fixture(autouse=True)
+def auto_enable_custom_integrations(enable_custom_integrations): # pylint: disable=unused-argument
+    """Auto enable custom  integrations."""
+    yield
 
 
 @pytest.fixture(name="api")

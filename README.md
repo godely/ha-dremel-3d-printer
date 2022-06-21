@@ -14,20 +14,19 @@ Home Assistant integration with Dremel 3D Printer (models 3D20, 3D40 and 3D45).
 ### Sensors
 
 #### Chamber Temperature
-* Shows the current temperature inside the 3D printer chamber.
+Shows the current temperature inside the 3D printer chamber.
 
 #### Extruder Temperature
-* Shows the current temperature of the filament extruder.
+Shows the current temperature of the filament extruder.
 
 #### Platform Temperature
-* Shows the current temperature of the base platform.
+Shows the current temperature of the base platform.
 
 #### Progress
-* Shows the progress from 0% to 100% of the current printing job.
+Shows the progress from 0% to 100% of the current printing job.
 
 #### Job Phase
 ##### State
-Shows the current status of the 3D printer:
 * Idle
 * Preparing
 * Building
@@ -94,3 +93,10 @@ Resumes the paused printing job.
 Cancels the printing job.
 
 ### Services
+`print_job`
+
+field | description
+:--- | :---
+**device_id (Required)** | The 3D printer device
+**url (Optional)** | You must set either url or filepath. If url is set, it should contain a valid url pointing to a gcode file.
+**filepath (Optional)** | You must set either url or filepath. If filepath is set, it should contain a valid filepath pointing to a local gcode file.

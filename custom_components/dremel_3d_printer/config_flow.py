@@ -8,10 +8,10 @@ from homeassistant import config_entries
 from homeassistant.const import CONF_HOST
 from homeassistant.data_entry_flow import FlowResult
 import homeassistant.helpers.config_validation as cv
-from requests.exceptions import ConnectTimeout, HTTPError
+from requests.exceptions import ConnectionError, ConnectTimeout, HTTPError
 import voluptuous as vol
 
-from .const import DOMAIN
+from .const import _LOGGER, DOMAIN
 
 
 def _schema_with_defaults(host: str = "") -> vol.Schema:
@@ -45,6 +45,8 @@ class Dremel3DPrinterConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             )
         except (ConnectTimeout, HTTPError):
             errors = {"base": "cannot_connect"}
+        except ConnectionError:
+            errors = {"base": "invalid_host"}
         except Exception:  # pylint: disable=broad-except
             errors = {"base": "unknown"}
 

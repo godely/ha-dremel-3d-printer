@@ -10,14 +10,15 @@
                     "host": "Host"
                 },
                 "title": "Connect with your Dremel 3D Printer"
-            },
-            "abort": {
-                "already_configured": "This device has already been configured"
-            },
-            "error": {
-                "cannot_connect": "Cannot connect to the host",
-                "unknown": "Unknown Error"
             }
+        },
+        "abort": {
+            "already_configured": "This device has already been configured"
+        },
+        "error": {
+            "cannot_connect": "Cannot connect to the host",
+            "invalid_host": "Invalid host",
+            "unknown": "Unknown error"
         }
     }
 }

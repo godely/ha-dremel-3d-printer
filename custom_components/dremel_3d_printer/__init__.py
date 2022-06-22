@@ -26,7 +26,7 @@ PLATFORMS = [Platform.CAMERA, Platform.BINARY_SENSOR, Platform.SENSOR, Platform.
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up the OctoPrint component."""
+    """Set up the Dremel 3D Printer component."""
     if DOMAIN not in config:
         return True
 

@@ -7,18 +7,26 @@ on:
       - dev
 
 jobs:
-  validate:
+  checkout:
     runs-on: "ubuntu-latest"
-    name: Validate
+    name: Checkout validation
     steps:
         - uses: "actions/checkout@v2"
 
+  hacs:
+    runs-on: "ubuntu-latest"
+    name: HACS validation
+    steps:
         - name: HACS validation
           uses: "hacs/action@main"
           with:
             category: "integration"
             ignore: brands
 
+  hassfest:
+    runs-on: "ubuntu-latest"
+    name: Hassfest validation
+    steps:
         - name: Hassfest validation
           uses: "home-assistant/actions/hassfest@master"
 

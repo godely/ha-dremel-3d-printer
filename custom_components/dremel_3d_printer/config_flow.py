@@ -4,13 +4,12 @@ from __future__ import annotations
 from typing import Any
 
 from dremel3dpy import Dremel3DPrinter
-from requests.exceptions import ConnectTimeout, HTTPError
-import voluptuous as vol
-
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST
 from homeassistant.data_entry_flow import FlowResult
 import homeassistant.helpers.config_validation as cv
+from requests.exceptions import ConnectTimeout, HTTPError
+import voluptuous as vol
 
 from .const import DOMAIN
 

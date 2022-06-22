@@ -77,6 +77,9 @@ Shows the progress from 0% to 100% of the current printing job.
 13. Platform Max Temperature
 14. Hours Used
 
+#### Door Contact
+Shows whether the doors are closed/open.
+
 ### Camera
 
 #### Only available for model 3D45

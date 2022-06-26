@@ -1,6 +1,6 @@
 {
   "domain": "dremel_3d_printer",
-  "version": "0.2.0",
+  "version": "1.1.0",
   "name": "Dremel 3D Printer",
   "config_flow": true,
   "documentation": "https://github.com/godely/dremel-3d-printer-homeassistant",

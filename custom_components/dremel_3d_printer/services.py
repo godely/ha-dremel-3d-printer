@@ -174,14 +174,16 @@ async def async_setup_services(hass: HomeAssistant) -> None:
         output_dir = service.data.get(ATTR_OUTPUT_DIR)
         fps = service.data.get(ATTR_FPS)
         duration = service.data.get(ATTR_DURATION)
-        if (fps is None and duration is None) or (fps is not None and duration is not None):
+        if fps is not None and duration is not None:
             raise Exception("You should specify exactly one of FPS or Duration.")
-        elif fps:
+        elif fps is None and duration is None:
+            fps = 10
+        if fps:
             if not fps.replace('.','',1).isdigit():
                 raise Exception("FPS must be a numeric value.")
             else:
                 fps = float(fps)
-        elif duration:
+        else:
             if not duration.replace('.','',1).isdigit():
                 raise Exception("Duration must be a numeric value.")
             else:

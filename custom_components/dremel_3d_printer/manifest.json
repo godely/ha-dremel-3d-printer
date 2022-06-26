@@ -1,11 +1,11 @@
 {
   "domain": "dremel_3d_printer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "name": "Dremel 3D Printer",
   "config_flow": true,
   "documentation": "https://github.com/godely/dremel-3d-printer-homeassistant",
   "issue_tracker": "https://github.com/godely/dremel-3d-printer-homeassistant/issues",
-  "requirements": ["dremel3dpy==1.0.1"],
+  "requirements": ["dremel3dpy==1.1.0"],
   "codeowners": ["@godely"],
   "iot_class": "local_polling"
 }

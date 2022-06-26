@@ -2,7 +2,7 @@ print_job:
   name: Print Job
   description: Prints a 3D Job from a .gcode file.
   fields:
-    file_path:
+    filepath:
       name: Filepath
       description: Determine the local file path of the .gcode file.
       example: "files/my_file_name.gcode"
@@ -58,3 +58,80 @@ stop_job:
         device:
           integration: dremel_3d_printer
           manufacturer: Dremel
+take_snapshot:
+  name: Take a Snapshot
+  description: Take a snapshot using the current camera.
+  fields:
+    device_id:
+      name: Device
+      description: Device of the printer to use for taking the snapshot. Must be a 3D45 model.
+      required: true
+      selector:
+        device:
+          integration: dremel_3d_printer
+          manufacturer: Dremel
+          model: 3D45
+    output_dir:
+      name: Output directory
+      description: Directory to write the snapshot.
+      required: true
+      example: "/tmp/"
+      selector:
+        text:
+add_snapshot_to_gif:
+  name: Add Snapshot to Gif
+  description: Takes a snapshot with the printer camera and adds the image to the gif building process.
+  fields:
+    device_id:
+      name: Device
+      description: Device of the printer to use for adding a snapshot. Must be a 3D45 model.
+      required: true
+      selector:
+        device:
+          integration: dremel_3d_printer
+          manufacturer: Dremel
+          model: 3D45
+    name:
+      name: Gif name
+      description: Name of the gif. If not set, will use the job name.
+      example: "mygif"
+      selector:
+        text:
+make_gif:
+  name: Make Gif
+  description: Renders the gif from the images added to the gif building process with the given name.
+  fields:
+    device_id:
+      name: Device
+      description: Device of the printer to use for adding a snapshot. Must be a 3D45 model.
+      required: true
+      selector:
+        device:
+          integration: dremel_3d_printer
+          manufacturer: Dremel
+          model: 3D45
+    output_dir:
+      name: Output directory
+      description: Directory to write the built gif file.
+      required: true
+      example: "/tmp/"
+      selector:
+        text:
+    name:
+      name: Gif name
+      description: Name of the gif. If not set, will use the job name.
+      example: "mygif"
+      selector:
+        text:
+    fps:
+      name: FPS
+      description: FPS of the gif file. Either FPS or Duration must be defined, but not both.
+      example: 10
+      selector:
+        text:
+    duration:
+      name: Duration
+      description: Duration of each frame in the gif file. Either FPS or Duration must be defined, but not both.
+      example: 0.1
+      selector:
+        text:

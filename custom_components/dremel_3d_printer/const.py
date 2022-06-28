@@ -26,5 +26,7 @@ ATTR_OUTPUT_DIR = "output_dir"
 ATTR_FILENAME = "filename"
 ATTR_FPS = "fps"
 ATTR_DURATION = "duration"
+ATTR_SHOW_STATUS = "show_status"
+ATTR_SCALE = "scale"
 
 EVENT_DATA_NEW_PRINT_STATS = "dremel_3d_printer_new_print_stats"

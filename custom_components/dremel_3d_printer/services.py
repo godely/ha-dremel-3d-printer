@@ -21,6 +21,8 @@ from .const import (
     ATTR_FPS,
     ATTR_NAME,
     ATTR_OUTPUT_DIR,
+    ATTR_SCALE,
+    ATTR_SHOW_STATUS,
     ATTR_URL,
     DOMAIN,
     EVENT_DATA_NEW_PRINT_STATS,
@@ -52,6 +54,8 @@ SERVICE_TAKE_SNAPSHOT_SCHEMA = vol.Schema(
         vol.Required(ATTR_DEVICE_ID): cv.string,
         vol.Required(ATTR_OUTPUT_DIR): cv.string,
         vol.Optional(ATTR_FILENAME): cv.string,
+        vol.Optional(ATTR_SHOW_STATUS): cv.boolean,
+        vol.Optional(ATTR_SCALE): cv.small_float,
     }
 )
 
@@ -59,6 +63,8 @@ SERVICE_ADD_TO_GIF_SCHEMA = vol.Schema(
     {
         vol.Required(ATTR_DEVICE_ID): cv.string,
         vol.Optional(ATTR_NAME): cv.string,
+        vol.Optional(ATTR_SHOW_STATUS): cv.boolean,
+        vol.Optional(ATTR_SCALE): cv.small_float,
     }
 )
 
@@ -143,12 +149,14 @@ async def async_setup_services(hass: HomeAssistant) -> None:
         """Service to take a snapshot and add it to the gif with the given name."""
         api = get_api(service)
         camera = Dremel3D45Timelapse(api, None)
+        show_status = service.data.get(ATTR_SHOW_STATUS) or False
+        scale = service.data.get(ATTR_SCALE) or 1.0
+        print(not show_status)
         snapshot = await hass.async_add_executor_job(
-            camera.get_snapshot_as_ndarray
+            camera.get_snapshot_as_ndarray, not show_status, scale
         )
         output_dir = service.data.get(ATTR_OUTPUT_DIR)
-        if (name := service.data.get(ATTR_FILENAME)) is None:
-            name = str(datetime.datetime.now())
+        name = service.data.get(ATTR_FILENAME) or str(datetime.datetime.now())
         await hass.async_add_executor_job(
             write_snapshot, hass, output_dir, name, snapshot
         )
@@ -157,12 +165,12 @@ async def async_setup_services(hass: HomeAssistant) -> None:
         """Service to take a snapshot and add it to the gif with the given name."""
         api = get_api(service)
         camera = Dremel3D45Timelapse(api, None)
+        show_status = service.data.get(ATTR_SHOW_STATUS) or False
+        scale = service.data.get(ATTR_SCALE) or 1.0
         snapshot = await hass.async_add_executor_job(
-            camera.get_snapshot_as_ndarray
+            camera.get_snapshot_as_ndarray, not show_status, scale
         )
-        name = service.data.get(ATTR_NAME)
-        if name is None:
-            name = api.get_job_name()
+        name = service.data.get(ATTR_NAME) or api.get_job_name()
         gifmaker = GifMaker(hass, name)
         await hass.async_add_executor_job(
             gifmaker.add_snapshot, snapshot
@@ -171,14 +179,12 @@ async def async_setup_services(hass: HomeAssistant) -> None:
     async def make_gif(service: ServiceCall) -> None:
         """Service to render the gif with the given name."""
         api = get_api(service)
-        name = service.data.get(ATTR_NAME)
-        if name is None:
-            name = api.get_job_name()
+        name = service.data.get(ATTR_NAME) or api.get_job_name()
         output_dir = service.data.get(ATTR_OUTPUT_DIR)
         fps = service.data.get(ATTR_FPS)
         duration = service.data.get(ATTR_DURATION)
         if fps is not None and duration is not None:
-            raise Exception("You should specify exactly one of FPS or Duration.")
+            fps = None
         elif fps is None and duration is None:
             fps = 10
         if fps:

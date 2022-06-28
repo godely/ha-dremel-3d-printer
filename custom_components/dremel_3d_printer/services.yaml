@@ -59,7 +59,7 @@ stop_job:
           integration: dremel_3d_printer
           manufacturer: Dremel
 take_snapshot:
-  name: Take a Snapshot
+  name: Take a snapshot
   description: Take a snapshot using the current camera.
   fields:
     device_id:
@@ -84,8 +84,25 @@ take_snapshot:
       example: "foobar"
       selector:
         text:
+    show_status:
+      name: Show status
+      description: Add status information to the snapshot, such as a progress bar.
+      example: False
+      default: false
+      selector:
+        boolean:
+    scale:
+      name: Snapshot scale
+      description: Scale of the snapshot, in which 1.0 yields a 640x480 image. Default to 1.0.
+      example: 1.0
+      default: 1.0
+      selector:
+        number:
+          min: 0.0
+          max: 1.0
+          step: 0.01
 add_snapshot_to_gif:
-  name: Add Snapshot to Gif
+  name: Add snapshot to gif
   description: Takes a snapshot with the printer camera and adds the image to the gif building process.
   fields:
     device_id:
@@ -103,6 +120,23 @@ add_snapshot_to_gif:
       example: "mygif"
       selector:
         text:
+    show_status:
+      name: Show status
+      description: Add status information to the snapshot, such as a progress bar. Default to false.
+      example: False
+      default: false
+      selector:
+        boolean:
+    scale:
+      name: Snapshot scale
+      description: Scale of the snapshot, in which 1.0 yields a 640x480 image. Default to 1.0.
+      example: 1.0
+      default: 1.0
+      selector:
+        number:
+          min: 0.0
+          max: 1.0
+          step: 0.01
 make_gif:
   name: Make Gif
   description: Renders the gif from the images added to the gif building process with the given name.
@@ -131,13 +165,14 @@ make_gif:
         text:
     fps:
       name: FPS
-      description: FPS of the gif file. Either FPS or Duration must be defined, but not both.
+      description: FPS of the gif file.
       example: 10
+      default: 10
       selector:
         text:
     duration:
       name: Duration
-      description: Duration of each frame in the gif file. Either FPS or Duration must be defined, but not both.
+      description: Duration of each frame in the gif file. If set, will override FPS value.
       example: 0.1
       selector:
         text:

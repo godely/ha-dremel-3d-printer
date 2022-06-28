@@ -78,6 +78,12 @@ take_snapshot:
       example: "/tmp/"
       selector:
         text:
+    filename:
+      name: Filename
+      description: Filename of the snapshot. If empty, will use the current date/time as the name.
+      example: "foobar"
+      selector:
+        text:
 add_snapshot_to_gif:
   name: Add Snapshot to Gif
   description: Takes a snapshot with the printer camera and adds the image to the gif building process.

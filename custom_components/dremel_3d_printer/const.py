@@ -23,6 +23,7 @@ ATTR_URL = "url"
 ATTR_DEVICE_ID = "device_id"
 ATTR_NAME = "name"
 ATTR_OUTPUT_DIR = "output_dir"
+ATTR_FILENAME = "filename"
 ATTR_FPS = "fps"
 ATTR_DURATION = "duration"
 

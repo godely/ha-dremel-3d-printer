@@ -43,5 +43,5 @@ class Dremel3D45Camera(Dremel3DPrinterDeviceEntity, MjpegCamera):
             mjpeg_url=coordinator.api.get_stream_url(),
             still_image_url=coordinator.api.get_snapshot_url(),
         )
-        self._attr_name = f"Dremel {self.coordinator.api.get_model()} Camera"
+        self._attr_name = f"Dremel {coordinator.api.get_model()} Camera"
         self._attr_unique_id = f"camera-{config_entry.unique_id}"

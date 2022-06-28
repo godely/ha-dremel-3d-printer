@@ -45,7 +45,7 @@ class Dremel3DPrinterButton(Dremel3DPrinterDeviceEntity, ButtonEntity):
         """Initialize a new Dremel 3D Printer button."""
         super().__init__(coordinator, config_entry)
         self._device_id = config_entry.unique_id
-        self._attr_name = f"{button_type}"
+        self._attr_name = f"Dremel {coordinator.api.get_model()} {button_type}"
         self._attr_unique_id = f"{button_type}-{config_entry.unique_id}"
 
 

@@ -44,7 +44,7 @@ class Dremel3DPrinterDoorBinarySensor(Dremel3DPrinterDeviceEntity, BinarySensorE
     ) -> None:
         """Initialize a new Dremel 3D Printer binary sensor."""
         super().__init__(coordinator, config_entry)
-        self._attr_name = "Door Contact"
+        self._attr_name = f"Dremel {coordinator.api.get_model()} Door Contact"
         self._attr_unique_id = f"door-contact-{config_entry.unique_id}"
 
     @property
@@ -68,7 +68,7 @@ class Dremel3DPrinterMainBinarySensor(Dremel3DPrinterDeviceEntity, BinarySensorE
     ) -> None:
         """Initialize a new Dremel 3D Printer binary sensor."""
         super().__init__(coordinator, config_entry)
-        self._attr_name = config_entry.title
+        self._attr_name = f"Dremel {coordinator.api.get_model()} Status"
         self._attr_unique_id = f"main-sensor-{config_entry.unique_id}"
         self._attr_extra_state_attributes = self.coordinator.api.get_printer_info()
 

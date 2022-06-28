@@ -52,7 +52,7 @@ class Dremel3DPrinterSensorBase(Dremel3DPrinterDeviceEntity, SensorEntity):
     ) -> None:
         """Initialize a new Dremel 3D Printer base sensor."""
         super().__init__(coordinator, config_entry)
-        self._attr_name = f"{sensor_type}"
+        self._attr_name = f"Dremel {coordinator.api.get_model()} {sensor_type}"
         self._attr_unique_id = f"{sensor_type}-{config_entry.unique_id}"
 
 
@@ -65,7 +65,7 @@ class Dremel3DPrinterStatusSensor(Dremel3DPrinterSensorBase):
         config_entry: ConfigEntry,
     ) -> None:
         """Initialize a new Dremel 3D Printer status sensor."""
-        super().__init__(coordinator, config_entry, "Job Phase")
+        super().__init__(coordinator, config_entry, "Job")
 
     @property
     def native_value(self) -> str:

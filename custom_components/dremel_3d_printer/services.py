@@ -16,6 +16,7 @@ from .const import (
     _LOGGER,
     ATTR_DEVICE_ID,
     ATTR_DURATION,
+    ATTR_FILENAME,
     ATTR_FILEPATH,
     ATTR_FPS,
     ATTR_NAME,
@@ -50,6 +51,7 @@ SERVICE_TAKE_SNAPSHOT_SCHEMA = vol.Schema(
     {
         vol.Required(ATTR_DEVICE_ID): cv.string,
         vol.Required(ATTR_OUTPUT_DIR): cv.string,
+        vol.Optional(ATTR_FILENAME): cv.string,
     }
 )
 
@@ -145,7 +147,8 @@ async def async_setup_services(hass: HomeAssistant) -> None:
             camera.get_snapshot_as_ndarray
         )
         output_dir = service.data.get(ATTR_OUTPUT_DIR)
-        name = str(datetime.datetime.now())
+        if (name := service.data.get(ATTR_FILENAME)) is None:
+            name = str(datetime.datetime.now())
         await hass.async_add_executor_job(
             write_snapshot, hass, output_dir, name, snapshot
         )

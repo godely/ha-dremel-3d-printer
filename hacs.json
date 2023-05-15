@@ -1,5 +1,5 @@
 {
     "name": "Dremel 3D Printer",
-    "hacs": "1.25.6",
+    "hacs": "1.25.5",
     "homeassistant": "2023.4.0"
 }
